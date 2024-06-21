@@ -8,7 +8,7 @@ import { CoinsCalculationModule } from './coins-calculation/coins-calculation.mo
 @Module({
   imports: [
     MongooseModule.forRoot(
-      'mongodb+srv://khachatryandavit55:bqHnmqzyMdVhVtEl@cluster0.knqf3ei.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',
+      '',
     ),
     AuthModule,
     CoinsCalculationModule,
