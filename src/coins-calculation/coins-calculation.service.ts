@@ -2,13 +2,10 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreateCoinsCalculationDto } from './dto/create-coins-calculation.dto';
-import {
-  CoinsCalculation,
-  CoinsCalculationDocument,
-} from './schema/coins-calculation.schema';
+import { CoinsCalculation, CoinsCalculationDocument } from './schema/coins-calculation.schema';
 
 @Injectable()
-export class CoinsCalculationService {
+export class CoinsCalculationsService {
   constructor(
     @InjectModel(CoinsCalculation.name)
     private coinsCalculationModel: Model<CoinsCalculationDocument>,

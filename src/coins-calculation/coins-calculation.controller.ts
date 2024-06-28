@@ -7,27 +7,27 @@ import {
   Body,
   Param,
 } from '@nestjs/common';
-import { CoinsCalculationService } from './coins-calculation.service';
+import { CoinsCalculationsService } from './coins-calculation.service';
 import { CreateCoinsCalculationDto } from './dto/create-coins-calculation.dto';
 
 @Controller('coins-calculations')
-export class CoinsCalculationController {
+export class CoinsCalculationsController {
   constructor(
-    private readonly coinsCalculationService: CoinsCalculationService,
+    private readonly coinsCalculationsService: CoinsCalculationsService,
   ) {}
 
   @Post()
   async addCoinsCalculation(
     @Body() createCoinsCalculationDto: CreateCoinsCalculationDto,
   ) {
-    return this.coinsCalculationService.addCoinsCalculation(
+    return this.coinsCalculationsService.addCoinsCalculation(
       createCoinsCalculationDto,
     );
   }
 
   @Get(':userId')
   async getUserCoinsCalculations(@Param('userId') userId: string) {
-    return this.coinsCalculationService.getUserCoinsCalculations(userId);
+    return this.coinsCalculationsService.getUserCoinsCalculations(userId);
   }
 
   @Put(':userId/:dataId')
@@ -36,7 +36,7 @@ export class CoinsCalculationController {
     @Param('dataId') dataId: number,
     @Body() updateCoinsCalculationDto: Partial<CreateCoinsCalculationDto>,
   ) {
-    return this.coinsCalculationService.updateCoinsCalculation(
+    return this.coinsCalculationsService.updateCoinsCalculation(
       userId,
       dataId,
       updateCoinsCalculationDto,
@@ -48,6 +48,6 @@ export class CoinsCalculationController {
     @Param('userId') userId: string,
     @Param('dataId') dataId: number,
   ) {
-    return this.coinsCalculationService.deleteCoinsCalculation(userId, dataId);
+    return this.coinsCalculationsService.deleteCoinsCalculation(userId, dataId);
   }
 }
