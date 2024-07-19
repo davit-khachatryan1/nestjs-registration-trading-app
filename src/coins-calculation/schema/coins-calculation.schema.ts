@@ -143,6 +143,9 @@ export class CoinsCalculation {
   @Prop({ type: Results, required: true })
   results: Results;
 
+  @Prop({required: true})
+  name: string;
+
   @Prop({ type: String, required: true })
   userId: string;
 }
