@@ -1,52 +1,251 @@
-import { IsNumber, IsObject, IsNotEmpty, IsString } from 'class-validator';
+import { IsNumber, IsObject, IsNotEmpty, IsString, IsOptional } from 'class-validator';
+
 
 class DataDto {
   @IsNumber()
+  @IsOptional()
   Y4: number;
 
   @IsNumber()
+  @IsOptional()
   A242: number;
 
   @IsNumber()
+  @IsOptional()
   D244: number;
 
   @IsNumber()
+  @IsOptional()
   E242: number;
 
   @IsNumber()
+  @IsOptional()
   B4: number;
 
   @IsNumber()
+  @IsOptional()
   C4: number;
 
   @IsNumber()
+  @IsOptional()
   D4: number;
 
   @IsNumber()
+  @IsOptional()
   E4: number;
 
   @IsNumber()
+  @IsOptional()
   G4: number;
 
   @IsNumber()
+  @IsOptional()
   N4: number;
 
   @IsNumber()
+  @IsOptional()
   O4: number;
 
   @IsNumber()
+  @IsOptional()
   P4: number;
 
   @IsNumber()
+  @IsOptional()
   P5: number;
 
   @IsNumber()
+  @IsOptional()
   CG4: number;
 
   @IsNumber()
+  @IsOptional()
   CH4: number;
-}
 
+  @IsNumber()
+  @IsOptional()
+  Z4: number;
+
+  @IsNumber()
+  @IsOptional()
+  AI4: number;
+
+  @IsNumber()
+  @IsOptional()
+  BO4: number;
+
+  @IsNumber()
+  @IsOptional()
+  AJ4: number;
+
+  @IsNumber()
+  @IsOptional()
+  AC4: number;
+
+  @IsNumber()
+  @IsOptional()
+  BF4: number;
+
+  @IsNumber()
+  @IsOptional()
+  U4: number;
+
+  @IsNumber()
+  @IsOptional()
+  V4: number;
+
+  @IsNumber()
+  @IsOptional()
+  W4: number;
+
+  @IsNumber()
+  @IsOptional()
+  X4: number;
+
+  @IsNumber()
+  @IsOptional()
+  BE4: number;
+
+  @IsNumber()
+  @IsOptional()
+  BE242: number;
+
+  @IsNumber()
+  @IsOptional()
+  B242: number;
+
+  @IsNumber()
+  @IsOptional()
+  C244: number;
+
+  @IsNumber()
+  @IsOptional()
+  L6: number;
+
+  @IsNumber()
+  @IsOptional()
+  AF4: number;
+
+  @IsNumber()
+  @IsOptional()
+  AG4: number;
+
+  @IsNumber()
+  @IsOptional()
+  AH4: number;
+
+  @IsNumber()
+  @IsOptional()
+  AD4: number;
+
+  @IsNumber()
+  @IsOptional()
+  BG4: number;
+
+  @IsNumber()
+  @IsOptional()
+  AA4: number;
+
+  @IsNumber()
+  @IsOptional()
+  BP4: number;
+
+  @IsNumber()
+  @IsOptional()
+  K8: number;
+
+  @IsNumber()
+  @IsOptional()
+  K6: number;
+
+  @IsNumber()
+  @IsOptional()
+  K9: number;
+
+  @IsNumber()
+  @IsOptional()
+  G6: number;
+
+  @IsNumber()
+  @IsOptional()
+  F6: number;
+
+  @IsNumber()
+  @IsOptional()
+  G9: number;
+
+  @IsNumber()
+  @IsOptional()
+  AE4: number;
+
+  @IsNumber()
+  @IsOptional()
+  BI4: number;
+
+  @IsNumber()
+  @IsOptional()
+  AB4: number;
+
+  @IsNumber()
+  @IsOptional()
+  BR4: number;
+
+  @IsNumber()
+  @IsOptional()
+  L8: number;
+
+  @IsNumber()
+  @IsOptional()
+  L9: number;
+
+  @IsNumber()
+  @IsOptional()
+  I6: number;
+
+  @IsNumber()
+  @IsOptional()
+  E8: number;
+
+  @IsNumber()
+  @IsOptional()
+  E9: number;
+
+  @IsNumber()
+  @IsOptional()
+  BH4: number;
+
+  @IsNumber()
+  @IsOptional()
+  BQ4: number;
+
+  @IsNumber()
+  @IsOptional()
+  I8: number;
+
+  @IsNumber()
+  @IsOptional()
+  I9: number;
+
+  @IsNumber()
+  @IsOptional()
+  J6: number;
+
+  @IsNumber()
+  @IsOptional()
+  F8: number;
+
+  @IsNumber()
+  @IsOptional()
+  F9: number;
+
+  @IsNumber()
+  @IsOptional()
+  BJ4: number;
+
+  @IsNumber()
+  @IsOptional()
+  BS4: number;
+}
 class ResultsDto {
   @IsNumber()
   result_BE4: number;
@@ -128,8 +327,8 @@ class ResultsDto {
 }
 
 export class CreateCoinsCalculationDto {
-  @IsNumber()
-  id: number;
+  @IsString()
+  id: string;  // Change to string to match UUID
 
   @IsObject()
   @IsNotEmpty()
@@ -142,4 +341,8 @@ export class CreateCoinsCalculationDto {
   @IsString()
   @IsNotEmpty()
   userId: string;
+
+  @IsString()
+  @IsNotEmpty()
+  name: string;
 }

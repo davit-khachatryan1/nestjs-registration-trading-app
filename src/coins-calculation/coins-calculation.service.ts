@@ -13,10 +13,12 @@ export class CoinsCalculationsService {
 
   async addCoinsCalculation(
     createCoinsCalculationDto: CreateCoinsCalculationDto,
+    userId: string,
   ): Promise<CoinsCalculation> {
-    const newCalculation = new this.coinsCalculationModel(
-      createCoinsCalculationDto,
-    );
+    const newCalculation = new this.coinsCalculationModel({
+      ...createCoinsCalculationDto,
+      userId,
+    });
     return newCalculation.save();
   }
 
@@ -26,7 +28,7 @@ export class CoinsCalculationsService {
 
   async updateCoinsCalculation(
     userId: string,
-    dataId: number,
+    dataId: string,
     updateCoinsCalculationDto: Partial<CreateCoinsCalculationDto>,
   ): Promise<CoinsCalculation> {
     const calculation = await this.coinsCalculationModel.findOne({
@@ -43,7 +45,7 @@ export class CoinsCalculationsService {
 
   async deleteCoinsCalculation(
     userId: string,
-    dataId: number,
+    dataId: string,
   ): Promise<CoinsCalculation> {
     const calculation = await this.coinsCalculationModel.findOneAndDelete({
       userId,
