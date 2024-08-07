@@ -11,42 +11,31 @@ export class CoinsCalculationsService {
     private coinsCalculationModel: Model<CoinsCalculationDocument>,
   ) {}
 
-  async addCoinsCalculation(
-    createCoinsCalculationDto: CreateCoinsCalculationDto,
-    userId: string,
-  ): Promise<CoinsCalculation> {
-    const newCalculation = new this.coinsCalculationModel({
-      ...createCoinsCalculationDto,
+  async saveCoinsCalculation(createCoinsCalculationDto: CreateCoinsCalculationDto, userId: string): Promise<CoinsCalculation> {
+    const existingCalculation = await this.coinsCalculationModel.findOne({
+      id: createCoinsCalculationDto.id,
       userId,
     });
-    return newCalculation.save();
+
+    if (existingCalculation) {
+      // Update existing calculation
+      Object.assign(existingCalculation, createCoinsCalculationDto);
+      return existingCalculation.save();
+    } else {
+      // Add new calculation
+      const newCalculation = new this.coinsCalculationModel({
+        ...createCoinsCalculationDto,
+        userId,
+      });
+      return newCalculation.save();
+    }
   }
 
   async getUserCoinsCalculations(userId: string): Promise<CoinsCalculation[]> {
     return this.coinsCalculationModel.find({ userId }).exec();
   }
 
-  async updateCoinsCalculation(
-    userId: string,
-    dataId: string,
-    updateCoinsCalculationDto: Partial<CreateCoinsCalculationDto>,
-  ): Promise<CoinsCalculation> {
-    const calculation = await this.coinsCalculationModel.findOne({
-      userId,
-      id: dataId,
-    });
-    if (!calculation) {
-      throw new NotFoundException('Coins calculation not found');
-    }
-
-    Object.assign(calculation, updateCoinsCalculationDto);
-    return calculation.save();
-  }
-
-  async deleteCoinsCalculation(
-    userId: string,
-    dataId: string,
-  ): Promise<CoinsCalculation> {
+  async deleteCoinsCalculation(userId: string, dataId: string): Promise<CoinsCalculation> {
     const calculation = await this.coinsCalculationModel.findOneAndDelete({
       userId,
       id: dataId,
@@ -54,7 +43,6 @@ export class CoinsCalculationsService {
     if (!calculation) {
       throw new NotFoundException('Coins calculation not found');
     }
-
     return calculation;
   }
 }

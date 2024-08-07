@@ -15,46 +15,32 @@ import { JwtAuthGuard } from 'src/auth/guards/JwtAuthGuard';
 import { CoinsCalculationsService } from './coins-calculation.service';
 
 @Controller('coins-calculations')
-@UseGuards(JwtAuthGuard) // Apply guard to ensure routes are protected
+@UseGuards(JwtAuthGuard)
 export class CoinsCalculationsController {
   private readonly logger = new Logger(CoinsCalculationsController.name);
+
   constructor(
     private readonly coinsCalculationsService: CoinsCalculationsService,
-  ) {
-    console.log('fffffffffff');
-    
-  }
+  ) {}
 
   @Post()
-  async addCoinsCalculation(
+  async saveCoinsCalculation(
     @Body() createCoinsCalculationDto: CreateCoinsCalculationDto,
     @Request() req,
   ) {
-    this.logger.log('Received addCoinsCalculation request');
+    this.logger.log('Received saveCoinsCalculation request');
     this.logger.log(`Request User ID: ${req.user.userId}`);
     
-    return this.coinsCalculationsService.addCoinsCalculation(
+    return this.coinsCalculationsService.saveCoinsCalculation(
       createCoinsCalculationDto,
-      req.user.userId,  // Extract userId from the request object
+      req.user.userId,
     );
   }
 
   @Get(':userId')
   async getUserCoinsCalculations(@Param('userId') userId: string) {
+    this.logger.log(`Received getUserCoinsCalculations request for userId: ${userId}`);
     return this.coinsCalculationsService.getUserCoinsCalculations(userId);
-  }
-
-  @Put(':userId/:dataId')
-  async updateCoinsCalculation(
-    @Param('userId') userId: string,
-    @Param('dataId') dataId: string,
-    @Body() updateCoinsCalculationDto: Partial<CreateCoinsCalculationDto>,
-  ) {
-    return this.coinsCalculationsService.updateCoinsCalculation(
-      userId,
-      dataId,
-      updateCoinsCalculationDto,
-    );
   }
 
   @Delete(':userId/:dataId')
@@ -62,6 +48,7 @@ export class CoinsCalculationsController {
     @Param('userId') userId: string,
     @Param('dataId') dataId: string,
   ) {
+    this.logger.log(`Received deleteCoinsCalculation request for userId: ${userId} and dataId: ${dataId}`);
     return this.coinsCalculationsService.deleteCoinsCalculation(userId, dataId);
   }
 }
