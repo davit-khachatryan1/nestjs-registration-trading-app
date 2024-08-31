@@ -11,7 +11,7 @@ import {
   Logger,
 } from '@nestjs/common';
 import { CreateCoinsCalculationDto } from './dto/create-coins-calculation.dto';
-import { JwtAuthGuard } from 'src/auth/guards/JwtAuthGuard';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { CoinsCalculationsService } from './coins-calculation.service';
 
 @Controller('coins-calculations')

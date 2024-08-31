@@ -6,7 +6,7 @@ import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { User, UserSchema } from '../user/user.schema';
 import { jwtConstants } from './constants/constants';
-import { JwtStrategy } from './strategies/JwtStrategy';
+import { JwtStrategy } from './strategies/jwt.strategy';
 import { LocalStrategy } from './strategies/LocalStrategy';
 
 @Module({
@@ -15,7 +15,6 @@ import { LocalStrategy } from './strategies/LocalStrategy';
     PassportModule,
     JwtModule.register({
       secret: jwtConstants.secret,
-      signOptions: { expiresIn: '60m' },
     }),
   ],
   controllers: [AuthController],

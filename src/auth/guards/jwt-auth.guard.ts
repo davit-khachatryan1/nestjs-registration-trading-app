@@ -12,6 +12,8 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
   }
 
   handleRequest(err, user, info, context) {
+    console.log(JSON.stringify(info));
+    
     if (err || !user) {
       this.logger.error(`JWT validation failed: ${info?.message}`);
       throw err || new UnauthorizedException();

@@ -12,7 +12,7 @@ import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthService {
-  private readonly validAccessKey = 'arm123$'; // Define the valid access key
+  private readonly validAccessKey = 'arm123$';
 
   constructor(
     @InjectModel(User.name) private userModel: Model<UserDocument>,
@@ -59,8 +59,13 @@ export class AuthService {
       const newAccessToken = this.jwtService.sign(
         { username: payload.username, sub: payload.sub },
         { expiresIn: '1h' },
+      );      
+      
+      const newRefreashToken = this.jwtService.sign(
+        { username: payload.username, sub: payload.sub },
+        { expiresIn: '7h' },
       );
-      return { access_token: newAccessToken };
+      return { access_token: newAccessToken, refresh_token: newRefreashToken };
     } catch (e) {
       throw new UnauthorizedException();
     }
