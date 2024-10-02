@@ -13,7 +13,7 @@ import { UserModule } from './user/user.module';
     UserModule,
     CoinsCalculationsModule,
   ],
-  // controllers: [AppController],
-  // providers: [AppService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
