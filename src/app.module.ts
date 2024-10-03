@@ -8,7 +8,9 @@ import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb+srv://khachatryandavit55:bqHnmqzyMdVhVtEl@cluster0.knqf3ei.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'),
+    MongooseModule.forRoot(
+      'mongodb+srv://khachatryandavit55:bqHnmqzyMdVhVtEl@cluster0.knqf3ei.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',
+    ),
     AuthModule,
     UserModule,
     CoinsCalculationsModule,
