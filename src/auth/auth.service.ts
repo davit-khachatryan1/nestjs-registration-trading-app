@@ -59,8 +59,8 @@ export class AuthService {
       const newAccessToken = this.jwtService.sign(
         { username: payload.username, sub: payload.sub },
         { expiresIn: '1h' },
-      );      
-      
+      );
+
       const newRefreashToken = this.jwtService.sign(
         { username: payload.username, sub: payload.sub },
         { expiresIn: '7h' },
