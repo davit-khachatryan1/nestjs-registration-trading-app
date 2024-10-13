@@ -10,7 +10,7 @@ export class GeneralDataService {
   constructor(
     @InjectModel(GeneralData.name)
     private generalDataModel: Model<GeneralDataDocument>,
-    @InjectModel(User.name) private userModel: Model<UserDocument>,
+    @InjectModel(User.name) private userModel: Model<UserDocument>, // Inject UserModel here
   ) {}
 
   // Create new general data for a user
