@@ -1,61 +1,47 @@
-// general-data.service.ts
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { GeneralData, GeneralDataDocument } from './schema/general-data.schema';
 import { CreateGeneralDataDto } from './dto/create-general-data.dto';
+import { User, UserDocument } from 'src/user/user.schema';
+import { GeneralData, GeneralDataDocument } from './schema/general-data.schema';
 
 @Injectable()
 export class GeneralDataService {
   constructor(
     @InjectModel(GeneralData.name)
     private generalDataModel: Model<GeneralDataDocument>,
+    @InjectModel(User.name) private userModel: Model<UserDocument>,
   ) {}
 
-  // Create new general data
+  // Create new general data for a user
   async createGeneralData(
     createGeneralDataDto: CreateGeneralDataDto,
+    userId: string,
   ): Promise<GeneralData> {
-    const createdData = new this.generalDataModel(createGeneralDataDto);
-    return createdData.save();
-  }
-
-  // Find general data for a specific user
-  async findGeneralDataById(id: string): Promise<GeneralData> {
-    const generalData = await this.generalDataModel.findById(id);
-    if (!generalData) {
-      throw new NotFoundException(`General data not found for user ID ${id}`);
+    const user = await this.userModel.findById(userId);
+    if (!user) {
+      throw new NotFoundException('User not found');
     }
-    return generalData;
+
+    const generalData = new this.generalDataModel({
+      ...createGeneralDataDto,
+      user: user._id, // Associate with the user
+    });
+    return generalData.save();
   }
 
-  // Update general data
+  // Fetch general data for a specific user
+  async getGeneralDataByUserId(userId: string): Promise<GeneralData> {
+    return this.generalDataModel.findOne({ user: userId }).populate('user');
+  }
+
+  // Update general data for a specific user
   async updateGeneralData(
-    id: string,
+    userId: string,
     updateDto: Partial<CreateGeneralDataDto>,
   ): Promise<GeneralData> {
-    const updatedGeneralData = await this.generalDataModel.findByIdAndUpdate(
-      id,
-      updateDto,
-      {
-        new: true,
-      },
-    );
-    if (!updatedGeneralData) {
-      throw new NotFoundException(`General data not found for user ID ${id}`);
-    }
-    return updatedGeneralData;
-  }
-
-  // Ensure general data is created if it doesn't exist (can be used during registration)
-  async ensureGeneralDataForUser(
-    createGeneralDataDto: CreateGeneralDataDto,
-  ): Promise<GeneralData> {
-    const generalDataExists =
-      await this.generalDataModel.findOne(createGeneralDataDto);
-    if (!generalDataExists) {
-      return this.createGeneralData(createGeneralDataDto);
-    }
-    return generalDataExists;
+    return this.generalDataModel
+      .findOneAndUpdate({ user: userId }, { ...updateDto }, { new: true })
+      .populate('user');
   }
 }

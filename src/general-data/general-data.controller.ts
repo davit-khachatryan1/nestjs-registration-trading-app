@@ -1,5 +1,4 @@
-// general-data.controller.ts
-import { Controller, Post, Get, Param, Body, Patch } from '@nestjs/common';
+import { Controller, Post, Get, Param, Patch, Body } from '@nestjs/common';
 import { GeneralDataService } from './general-data.service';
 import { CreateGeneralDataDto } from './dto/create-general-data.dto';
 
@@ -7,24 +6,33 @@ import { CreateGeneralDataDto } from './dto/create-general-data.dto';
 export class GeneralDataController {
   constructor(private readonly generalDataService: GeneralDataService) {}
 
-  // Create general data
-  @Post()
-  async createGeneralData(@Body() createGeneralDataDto: CreateGeneralDataDto) {
-    return this.generalDataService.createGeneralData(createGeneralDataDto);
+  // Create general data for a user
+  @Post(':userId')
+  async createGeneralData(
+    @Param('userId') userId: string,
+    @Body() createGeneralDataDto: CreateGeneralDataDto,
+  ) {
+    return this.generalDataService.createGeneralData(
+      createGeneralDataDto,
+      userId,
+    );
   }
 
-  // Get general data by ID
-  @Get(':id')
-  async getGeneralData(@Param('id') id: string) {
-    return this.generalDataService.findGeneralDataById(id);
+  // Get general data by user ID
+  @Get(':userId')
+  async getGeneralDataByUserId(@Param('userId') userId: string) {
+    return this.generalDataService.getGeneralDataByUserId(userId);
   }
 
-  // Update general data
-  @Patch(':id')
+  // Update general data for a user
+  @Patch(':userId')
   async updateGeneralData(
-    @Param('id') id: string,
+    @Param('userId') userId: string,
     @Body() updateGeneralDataDto: Partial<CreateGeneralDataDto>,
   ) {
-    return this.generalDataService.updateGeneralData(id, updateGeneralDataDto);
+    return this.generalDataService.updateGeneralData(
+      userId,
+      updateGeneralDataDto,
+    );
   }
 }
