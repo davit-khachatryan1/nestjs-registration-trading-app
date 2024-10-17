@@ -38,10 +38,16 @@ export class GeneralDataService {
   // Update general data for a specific user
   async updateGeneralData(
     userId: string,
-    updateDto: Partial<CreateGeneralDataDto>,
+    updateDto: CreateGeneralDataDto,
   ): Promise<GeneralData> {
-    return this.generalDataModel
+    const data = await this.generalDataModel
       .findOneAndUpdate({ user: userId }, { ...updateDto }, { new: true })
       .populate('user');
+
+    if (!data) {
+      this.createGeneralData(updateDto, userId);
+    }
+
+    return data;
   }
 }

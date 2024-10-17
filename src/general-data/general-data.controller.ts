@@ -28,7 +28,7 @@ export class GeneralDataController {
   @Patch(':userId')
   async updateGeneralData(
     @Param('userId') userId: string,
-    @Body() updateGeneralDataDto: Partial<CreateGeneralDataDto>,
+    @Body() updateGeneralDataDto: CreateGeneralDataDto,
   ) {
     return this.generalDataService.updateGeneralData(
       userId,
