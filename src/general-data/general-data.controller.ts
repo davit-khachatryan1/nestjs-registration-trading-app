@@ -1,4 +1,12 @@
-import { Controller, Post, Get, Param, Patch, Body } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Get,
+  Param,
+  Patch,
+  Body,
+  ValidationPipe,
+} from '@nestjs/common';
 import { GeneralDataService } from './general-data.service';
 import { CreateGeneralDataDto } from './dto/create-general-data.dto';
 
@@ -10,7 +18,8 @@ export class GeneralDataController {
   @Post(':userId')
   async createGeneralData(
     @Param('userId') userId: string,
-    @Body() createGeneralDataDto: CreateGeneralDataDto,
+    @Body(new ValidationPipe({ whitelist: true }))
+    createGeneralDataDto: CreateGeneralDataDto,
   ) {
     return this.generalDataService.createGeneralData(
       createGeneralDataDto,
