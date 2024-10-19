@@ -3,7 +3,7 @@ import { Document } from 'mongoose';
 
 export type CoinsCalculationDocument = CoinsCalculation & Document;
 
-@Schema()
+@Schema({ _id: false })
 export class Data {
   @Prop({ type: Number, required: false })
   Y4: number;
@@ -189,8 +189,7 @@ export class Data {
   BS4: number;
 }
 
-
-@Schema()
+@Schema({ _id: false })
 export class Results {
   @Prop({ type: Number, required: false })
   result_BE4: number;
@@ -273,7 +272,7 @@ export class Results {
 
 @Schema()
 export class CoinsCalculation {
-  @Prop({ type: String,required: true })
+  @Prop({ type: String, required: true })
   id: number;
 
   @Prop({ type: Data, required: true })
@@ -282,7 +281,7 @@ export class CoinsCalculation {
   @Prop({ type: Results, required: true })
   results: Results;
 
-  @Prop({required: false})
+  @Prop({ required: false })
   name: string;
 
   @Prop({ type: String, required: true })
