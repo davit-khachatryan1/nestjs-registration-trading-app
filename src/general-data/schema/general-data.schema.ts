@@ -10,22 +10,22 @@ export class GeneralData {
   user: User;
 
   @Prop({ required: true })
-  balance: number;
+  A242: number;
 
   @Prop({ required: true })
-  initialBalance: number;
+  D244: number;
 
   @Prop({ required: true })
   accumulatedBalance: number;
 
   @Prop({ required: true })
-  numberOfLongs: number;
+  CG4: number;
 
   @Prop({ required: true })
-  numberOfShorts: number;
+  CH4: number;
 
   @Prop({ required: true })
-  coinQuantity: number;
+  E242: number;
 }
 
 export const GeneralDataSchema = SchemaFactory.createForClass(GeneralData);

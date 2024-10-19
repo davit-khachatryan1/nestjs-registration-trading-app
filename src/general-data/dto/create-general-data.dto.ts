@@ -4,11 +4,11 @@ import { IsNotEmpty, IsNumber } from 'class-validator';
 export class CreateGeneralDataDto {
   @IsNotEmpty()
   @IsNumber()
-  balance: number;
+  A242: number;
 
   @IsNotEmpty()
   @IsNumber()
-  initialBalance: number;
+  D244: number;
 
   @IsNotEmpty()
   @IsNumber()
@@ -16,13 +16,13 @@ export class CreateGeneralDataDto {
 
   @IsNotEmpty()
   @IsNumber()
-  numberOfLongs: number;
+  CG4: number;
 
   @IsNotEmpty()
   @IsNumber()
-  numberOfShorts: number;
+  CH4: number;
 
   @IsNotEmpty()
   @IsNumber()
-  coinQuantity: number;
+  E242: number;
 }
